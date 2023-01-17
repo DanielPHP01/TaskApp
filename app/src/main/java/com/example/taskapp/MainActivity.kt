@@ -1,14 +1,16 @@
 package com.example.taskapp
-
 import android.os.Bundle
 import android.view.View
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.taskapp.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
+
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,7 +18,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -34,11 +35,16 @@ class MainActivity : AppCompatActivity() {
             )
         )
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.newTask) {
+            if (destination.id == R.id.newTask || destination.id == R.id.boardFragment) {
                 navView.visibility = View.GONE
             } else {
                 navView.visibility = View.VISIBLE
             }
+            if (destination.id == R.id.boardFragment) {
+            supportActionBar?.hide()
+
+        }
+
         }
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
