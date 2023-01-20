@@ -7,6 +7,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.taskapp.databinding.ActivityMainBinding
+import com.example.taskapp.ui.home.new_task.NewTaskFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+//        NewTaskFragment().initViews()
 
         val navView: BottomNavigationView = binding.navView
 

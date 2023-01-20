@@ -1,5 +1,6 @@
 package com.example.taskapp.ui.board
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.example.taskapp.databinding.FragmentOnBoardPageBinding
 class OnBoardPageFragment(
     var listenerSkip: () -> Unit,
     var listenerNext: () -> Unit,
+    var listenerBackground: () -> Unit
 ) : Fragment() {
 
 
@@ -45,6 +47,8 @@ class OnBoardPageFragment(
     }
 
     private fun initListeners() {
+        listenerBackground.invoke()
+
         binding.btnNext.setOnClickListener{
             listenerNext.invoke()
         }

@@ -1,10 +1,13 @@
 package com.example.taskapp.ui.home.new_task
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
 import androidx.core.os.bundleOf
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
@@ -19,10 +22,14 @@ class NewTaskFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentNewTaskBinding.inflate(inflater, container, false)
-        // initViews() Метод не рабочий и пустой
         initListeners()
         return binding.root
     }
+
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//      // initViews() метод не рабочий
+//    }
 
     private fun initListeners() {
         binding.btnSave.setOnClickListener {
@@ -36,7 +43,27 @@ class NewTaskFragment : Fragment() {
         }
     }
 
-    private fun initViews() {
-        // Метод не использовался!!!
-    }
+//    fun initViews() {
+//        @Override
+//        public void onUserInteraction() {
+//            super.onUserInteraction();
+//            if (editText.hasFocus() ) { // to check if user is clicked on edit text
+//                if (scroll.getVerticalScrollbarPosition() != scroll.getBottom())  // if scrollview is not already on the bottom
+//                    scroll.post(() -> scroll.scrollTo(0, scroll.getBottom()));
+//            }
+//        }
+//    }
+//
+//
+//    private fun getSystemService(): Any {
+//        return context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//    }
+//
+//    fun showSoftKeyboard(view: View) {
+//        if (view.requestFocus()) {
+//            val imm = getSystemService() as InputMethodManager
+//            imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
+//        }
+//    }
+
 }

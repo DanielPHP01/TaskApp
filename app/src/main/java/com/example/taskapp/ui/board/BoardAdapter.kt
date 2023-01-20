@@ -10,6 +10,7 @@ class BoardAdapter(
     fm: FragmentManager,
     var listenerSkip: () -> Unit,
     var listenerNext: () -> Unit,
+    var listenerBackground: () -> Unit
 
     ) : FragmentStatePagerAdapter(fm) {
 
@@ -38,7 +39,7 @@ class BoardAdapter(
 
     override fun getItem(position: Int): Fragment {
         val data = bundleOf("onBoard" to listBoarding[position])
-        val fragment = OnBoardPageFragment(listenerSkip, listenerNext)
+        val fragment = OnBoardPageFragment(listenerSkip, listenerNext,listenerBackground)
         fragment.arguments = data
         return fragment
     }
