@@ -1,4 +1,5 @@
 package com.example.taskapp
+
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -8,9 +9,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.taskapp.databinding.ActivityMainBinding
 import com.example.taskapp.ui.home.new_task.NewTaskFragment
+import com.example.taskapp.utila.Preferences
 import com.google.android.material.bottomnavigation.BottomNavigationView
-
-
 
 
 class MainActivity : AppCompatActivity() {
@@ -36,6 +36,11 @@ class MainActivity : AppCompatActivity() {
                 R.id.profileFragment
             )
         )
+
+        if (!Preferences(applicationContext).isBoardingShowed()) {
+            navController.navigate(R.id.boardFragment)
+        }
+
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if (destination.id == R.id.newTask || destination.id == R.id.boardFragment) {
                 navView.visibility = View.GONE
@@ -43,9 +48,10 @@ class MainActivity : AppCompatActivity() {
                 navView.visibility = View.VISIBLE
             }
             if (destination.id == R.id.boardFragment) {
-            supportActionBar?.hide()
-
-        }
+                supportActionBar?.hide()
+            } else {
+                supportActionBar?.show()
+            }
 
         }
         setupActionBarWithNavController(navController, appBarConfiguration)

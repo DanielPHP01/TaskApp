@@ -1,5 +1,6 @@
 package com.example.taskapp.ui.board
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,11 +11,11 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.taskapp.R
 import com.example.taskapp.databinding.FragmentOnBoardPageBinding
+import com.example.taskapp.utila.Preferences
 
 class OnBoardPageFragment(
     var listenerSkip: () -> Unit,
     var listenerNext: () -> Unit,
-    var listenerBackground: () -> Unit
 ) : Fragment() {
 
 
@@ -43,22 +44,28 @@ class OnBoardPageFragment(
             binding.btnSkip.isVisible = data.isLast == false
             binding.btnNext.isVisible = data.isLast == false
             binding.btnStart.isVisible = data.isLast == true
+
+            if (data.isLast == true) {
+                binding.pageBoard.setBackgroundResource(data.bg)
+            } else {
+                binding.pageBoard.setBackgroundResource(data.bg)
+            }
         }
     }
 
     private fun initListeners() {
-        listenerBackground.invoke()
 
-        binding.btnNext.setOnClickListener{
+        binding.btnNext.setOnClickListener {
             listenerNext.invoke()
         }
 
-        binding.btnSkip.setOnClickListener{
+        binding.btnSkip.setOnClickListener {
             listenerSkip.invoke()
         }
 
         binding.btnStart.setOnClickListener {
-            (findNavController().navigate(R.id.navigation_home))
+            Preferences(requireContext()).setBoardingShowed(true)
+            findNavController().navigateUp()
         }
     }
 }

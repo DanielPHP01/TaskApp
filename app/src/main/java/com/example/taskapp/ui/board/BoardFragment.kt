@@ -29,7 +29,6 @@ class BoardFragment : Fragment() {
             childFragmentManager,
             this::SkipClick,
             this::NextClick,
-            this::changeBackground
         )
         binding.vpBoard.adapter = adapter
         binding.dotsIndicator.attachTo(binding.vpBoard)
@@ -44,20 +43,6 @@ class BoardFragment : Fragment() {
         binding.vpBoard.currentItem += 1
     }
 
-    private fun changeBackground() {
-        when (binding.vpBoard.currentItem) {
-            0 -> {
-                binding.vpBoard.setBackgroundColor(R.drawable.back_page_one)
-            }
-            1 -> {
-                binding.vpBoard.setBackgroundColor(R.drawable.back_page_two)
-            }
-            2 -> {
-                binding.vpBoard.setBackgroundColor(R.drawable.back_page_third)
-            }
-            else -> {
-                binding.vpBoard.setBackgroundColor(Color.RED)
-            }
-        }
-    }
 }
+
+
