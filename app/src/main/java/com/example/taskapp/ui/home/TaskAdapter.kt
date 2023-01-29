@@ -10,9 +10,15 @@ class TaskAdapter() : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
 
     private var arrayTask = arrayListOf<TaskMode>()
 
-    fun addTask(taskMode: TaskMode) {
-        arrayTask.add(taskMode)
-        Log.e("ololo", "addTask" + taskMode.title)
+//    fun addTask(taskMode: List<TaskMode>) {
+//        arrayTask.add(taskMode)
+//        Log.e("ololo", "addTask" + taskMode.title)
+//        notifyDataSetChanged()
+//    }
+
+    fun addTasks(list: List<TaskMode>) {
+        arrayTask.clear()
+        arrayTask.addAll(list)
         notifyDataSetChanged()
     }
 

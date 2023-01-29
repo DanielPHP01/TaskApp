@@ -1,14 +1,13 @@
 package com.example.taskapp.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.taskapp.App
 import com.example.taskapp.R
 import com.example.taskapp.databinding.FragmentHomeBinding
 
@@ -42,13 +41,16 @@ class HomeFragment : Fragment() {
         binding.rvHome.layoutManager = LinearLayoutManager(context)
         binding.rvHome.adapter = adapter
 
-        setFragmentResultListener("new_task") { key, bundle ->
-            val title = bundle.getString("title")
-            val desc = bundle.getString("desc")
-            Log.e("ololo", "initViews: $title и $desc")
+//        setFragmentResultListener("new_task") { key, bundle ->
+//            val title = bundle.getString("title")
+//            val desc = bundle.getString("desc")
+//            Log.e("ololo", "initViews: $title и $desc")
+//
+//            adapter.addTask(TaskMode(title, desc))
+//        }
 
-            adapter.addTask(TaskMode(title, desc))
-        }
+        val listOfTask = App.database.TaskDao()?.getAllTask()
+        adapter.addTasks(listOfTask as List<TaskMode>)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

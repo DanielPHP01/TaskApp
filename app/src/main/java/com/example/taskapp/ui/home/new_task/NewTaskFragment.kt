@@ -1,17 +1,14 @@
 package com.example.taskapp.ui.home.new_task
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import android.view.inputmethod.InputMethodManager
-import androidx.core.os.bundleOf
-import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import com.example.taskapp.databinding.FragmentNewTaskBinding
+import com.example.taskapp.ui.home.TaskMode
+import com.example.taskapp.App
 
 class NewTaskFragment : Fragment() {
 
@@ -33,12 +30,16 @@ class NewTaskFragment : Fragment() {
 
     private fun initListeners() {
         binding.btnSave.setOnClickListener {
-            setFragmentResult(
-                "new_task", bundleOf(
-                    "title" to binding.etTitle.text.toString(),
-                    "desc" to binding.etDesc.text.toString()
-                )
-            )
+//            setFragmentResult(
+//                "new_task", bundleOf(
+//                    "title" to binding.etTitle.text.toString(),
+//                    "desc" to binding.etDesc.text.toString()
+//                )
+//            )
+            App.database.TaskDao()?.insert(TaskMode(
+              title =  binding.etTitle.text.toString(),
+              desc =  binding.etDesc.text.toString()
+            ))
             findNavController().navigateUp()
         }
     }
