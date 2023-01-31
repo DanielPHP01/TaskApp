@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.taskapp.ui.board
 
 import androidx.core.os.bundleOf
@@ -8,8 +10,8 @@ import com.example.taskapp.R
 
 class BoardAdapter(
     fm: FragmentManager,
-    var listenerSkip: () -> Unit,
-    var listenerNext: () -> Unit,
+    private var listenerSkip: () -> Unit,
+    private var listenerNext: () -> Unit,
 
     ) : FragmentStatePagerAdapter(fm) {
 

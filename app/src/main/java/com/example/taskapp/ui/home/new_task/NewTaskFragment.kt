@@ -17,7 +17,7 @@ class NewTaskFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentNewTaskBinding.inflate(inflater, container, false)
         initListeners()
         return binding.root

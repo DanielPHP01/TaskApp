@@ -2,11 +2,8 @@ package com.example.taskapp.utila
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.icu.text.CaseMap.Title
-import android.widget.ImageView
-
 class Preferences(private val context: Context) {
-    val sharedPreference: SharedPreferences =
+    private val sharedPreference: SharedPreferences =
         context.getSharedPreferences("onBoard", Context.MODE_PRIVATE)
 
     fun setBoardingShowed(isShow: Boolean) {

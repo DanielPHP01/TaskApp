@@ -1,12 +1,10 @@
 package com.example.taskapp.ui.board
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.taskapp.R
 import com.example.taskapp.databinding.FragmentBoardBinding
 
 class BoardFragment : Fragment() {
@@ -16,7 +14,7 @@ class BoardFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
 
         binding = FragmentBoardBinding.inflate(LayoutInflater.from(context), container, false)

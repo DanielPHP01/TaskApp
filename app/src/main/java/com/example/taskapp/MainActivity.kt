@@ -8,7 +8,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.taskapp.databinding.ActivityMainBinding
-import com.example.taskapp.ui.home.new_task.NewTaskFragment
 import com.example.taskapp.utila.Preferences
 import com.google.android.material.bottomnavigation.BottomNavigationView
 

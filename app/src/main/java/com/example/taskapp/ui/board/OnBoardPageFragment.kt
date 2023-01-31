@@ -1,7 +1,5 @@
 package com.example.taskapp.ui.board
 
-import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,21 +7,20 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.taskapp.R
 import com.example.taskapp.databinding.FragmentOnBoardPageBinding
 import com.example.taskapp.utila.Preferences
 
+@Suppress("DEPRECATION")
 class OnBoardPageFragment(
-    var listenerSkip: () -> Unit,
-    var listenerNext: () -> Unit,
+    private var listenerSkip: () -> Unit,
+    private var listenerNext: () -> Unit,
 ) : Fragment() {
-
 
     private lateinit var binding: FragmentOnBoardPageBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentOnBoardPageBinding.inflate(LayoutInflater.from(context), container, false)
         return binding.root
