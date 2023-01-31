@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.taskapp.R
 import com.example.taskapp.databinding.ItemTaskBinding
 
-class TaskAdapter(private var onLongClick: (Int) -> Unit) :
+class TaskAdapter(
+    private var onLongClick: (Int) -> Unit
+) :
     RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
 
     private var arrayTask = arrayListOf<TaskMode>()
@@ -29,7 +31,6 @@ class TaskAdapter(private var onLongClick: (Int) -> Unit) :
 
     fun getTask(position: Int): TaskMode {
         return arrayTask[position]
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -76,5 +77,6 @@ class TaskAdapter(private var onLongClick: (Int) -> Unit) :
             }
 
         }
+
     }
 }

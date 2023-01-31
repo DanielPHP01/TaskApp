@@ -1,9 +1,6 @@
 package com.example.taskapp.data.local.room
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.example.taskapp.ui.home.TaskMode
 
 
@@ -27,4 +24,7 @@ interface TaskDao {
 
     @Delete
     fun delete(task: TaskMode?)
+
+    @Update
+    fun update(task: TaskMode?)
 }

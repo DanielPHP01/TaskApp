@@ -16,7 +16,7 @@ class NewTaskFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         binding = FragmentNewTaskBinding.inflate(inflater, container, false)
         initListeners()
@@ -36,13 +36,16 @@ class NewTaskFragment : Fragment() {
 //                    "desc" to binding.etDesc.text.toString()
 //                )
 //            )
-            App.database.TaskDao()?.insert(TaskMode(
-              title =  binding.etTitle.text.toString(),
-              desc =  binding.etDesc.text.toString()
-            ))
+            App.database.TaskDao()?.insert(
+                TaskMode(
+                    title = binding.etTitle.text.toString(),
+                    desc = binding.etDesc.text.toString()
+                )
+            )
             findNavController().navigateUp()
         }
     }
+}
 
 //    fun initViews() {
 //        @Override
@@ -67,4 +70,4 @@ class NewTaskFragment : Fragment() {
 //        }
 //    }
 
-}
+

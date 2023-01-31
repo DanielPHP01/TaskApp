@@ -114,4 +114,9 @@ class HomeFragment : Fragment() {
         val listOfTask = App.database.TaskDao()?.getAllTask()
         adapter.addTasks(listOfTask as List<TaskMode>)
     }
+    private  fun onUpdateClickListener(pos:Int) {
+       val updateTask = App.database.TaskDao()?.update(adapter.getTask(pos))
+        adapter.addTasks(updateTask as List<TaskMode>)
+
+    }
 }
