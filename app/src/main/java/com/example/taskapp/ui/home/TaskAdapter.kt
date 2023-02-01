@@ -76,6 +76,9 @@ class TaskAdapter(
                 onLongClick(adapterPosition)
                 return@setOnLongClickListener true
             }
+            itemView.setOnClickListener{
+                onUpdateClick(taskMode)
+            }
         }
     }
 }

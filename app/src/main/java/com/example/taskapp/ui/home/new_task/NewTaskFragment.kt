@@ -5,12 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.taskapp.databinding.FragmentNewTaskBinding
 import com.example.taskapp.ui.home.TaskMode
 import com.example.taskapp.App
+import com.example.taskapp.MainActivity
 
-@Suppress("UNREACHABLE_CODE")
+@Suppress("UNREACHABLE_CODE", "DEPRECATION")
 class NewTaskFragment : Fragment() {
 
     private lateinit var binding: FragmentNewTaskBinding
@@ -25,7 +27,7 @@ class NewTaskFragment : Fragment() {
         return binding.root
     }
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
+    //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
 //      // initViews() метод не рабочий
 //    }
@@ -40,8 +42,10 @@ class NewTaskFragment : Fragment() {
             if (binding.etTitle.text.toString().isNotEmpty()) {
                 if (task != null) {
                     updateTask()
+                    Toast.makeText(this.requireContext(), "Обновленно", Toast.LENGTH_SHORT).show()
                 } else {
                     insertFun()
+                    Toast.makeText(this.requireContext(), "Добавленна", Toast.LENGTH_SHORT).show()
                 }
             } else {
                 binding.etTitle.error = "Заполните"
@@ -49,7 +53,7 @@ class NewTaskFragment : Fragment() {
         }
     }
 
-    private fun getTask() {1133
+    private fun getTask() {
         arguments?.let {
             val value = it.getSerializable("update")
             if (value != null) {
@@ -61,11 +65,12 @@ class NewTaskFragment : Fragment() {
     }
 
     private fun updateTask() {
-        TaskMode(
-            title = binding.etTitle.text.toString(),
-            desc = binding.etDesc.text.toString()
+        App.database.TaskDao()?.update(
+            TaskMode(
+                title = binding.etTitle.text.toString(),
+                desc = binding.etDesc.text.toString()
+            )
         )
-        task?.let { App.database.TaskDao()?.update(it) }
         findNavController().navigateUp()
     }
 
@@ -76,11 +81,12 @@ class NewTaskFragment : Fragment() {
 //                    "desc" to binding.etDesc.text.toString()
 //                )
 //            ) App.database.TaskDao()?.insert(
-        TaskMode(
-            title = binding.etTitle.text.toString(),
-            desc = binding.etDesc.text.toString()
+        App.database.TaskDao()?.insert(
+            TaskMode(
+                title = binding.etTitle.text.toString(),
+                desc = binding.etDesc.text.toString()
+            )
         )
-        task?.let { App.database.TaskDao()?.insert(it) }
         findNavController().navigateUp()
     }
 }
