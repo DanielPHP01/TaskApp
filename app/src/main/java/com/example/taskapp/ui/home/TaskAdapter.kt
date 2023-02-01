@@ -10,7 +10,8 @@ import com.example.taskapp.R
 import com.example.taskapp.databinding.ItemTaskBinding
 
 class TaskAdapter(
-    private var onLongClick: (Int) -> Unit
+    private var onLongClick: (Int) -> Unit,
+    private var onUpdateClick: (TaskMode) -> Unit,
 ) :
     RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
 
@@ -75,8 +76,6 @@ class TaskAdapter(
                 onLongClick(adapterPosition)
                 return@setOnLongClickListener true
             }
-
         }
-
     }
 }

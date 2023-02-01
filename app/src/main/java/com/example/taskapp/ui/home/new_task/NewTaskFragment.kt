@@ -10,9 +10,11 @@ import com.example.taskapp.databinding.FragmentNewTaskBinding
 import com.example.taskapp.ui.home.TaskMode
 import com.example.taskapp.App
 
+@Suppress("UNREACHABLE_CODE")
 class NewTaskFragment : Fragment() {
 
     private lateinit var binding: FragmentNewTaskBinding
+    private var task: TaskMode? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,22 +31,57 @@ class NewTaskFragment : Fragment() {
 //    }
 
     private fun initListeners() {
+        getTask()
+        checkTask()
+    }
+    private fun checkTask() {
+        binding.btnSave.setOnClickListener {
+            if (binding.etTitle.text.toString().isNotEmpty()) {
+                if (task != null) {
+                    updateTask()
+                } else {
+                    insertFun()
+                }
+            } else {
+                binding.etTitle.error = "Заполните"
+            }
+        }
+    }
+
+    private fun getTask() {
+        arguments?.let {
+            val value = it.getSerializable("update")
+            if (value != null) {
+                task = value as TaskMode
+                binding.etTitle.setText(task?.title.toString())
+                binding.etDesc.setText(task?.desc.toString())
+            }
+        }
+    }
+
+    private fun updateTask() {
+        task?.title = binding.etTitle.text.toString()
+        task?.desc = binding.etDesc.text.toString()
+        task?.let { App.database.TaskDao()?.update(it) }
+        findNavController().navigateUp()
+    }
+
+    private fun insertFun() {
         binding.btnSave.setOnClickListener {
 //            setFragmentResult(
 //                "new_task", bundleOf(
 //                    "title" to binding.etTitle.text.toString(),
 //                    "desc" to binding.etDesc.text.toString()
 //                )
-//            )
-            App.database.TaskDao()?.insert(
-                TaskMode(
-                    title = binding.etTitle.text.toString(),
-                    desc = binding.etDesc.text.toString()
-                )
+//            ) App.database.TaskDao()?.insert(
+            TaskMode(
+                title = binding.etTitle.text.toString(),
+                desc = binding.etDesc.text.toString()
             )
             findNavController().navigateUp()
         }
     }
+
 }
 
 //    fun initViews() {

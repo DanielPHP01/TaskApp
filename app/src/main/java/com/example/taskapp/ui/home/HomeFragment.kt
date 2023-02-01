@@ -3,6 +3,7 @@ package com.example.taskapp.ui.home
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -92,7 +93,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = TaskAdapter(this::onLongClickListener)
+        adapter = TaskAdapter(this::onLongClickListener,this::onUpdateClickListener)
     }
 
     private fun onLongClickListener(pos: Int) {
@@ -114,9 +115,7 @@ class HomeFragment : Fragment() {
         val listOfTask = App.database.TaskDao()?.getAllTask()
         adapter.addTasks(listOfTask as List<TaskMode>)
     }
-    private  fun onUpdateClickListener(pos:Int) {
-       val updateTask = App.database.TaskDao()?.update(adapter.getTask(pos))
-        adapter.addTasks(updateTask as List<TaskMode>)
-
+    private  fun onUpdateClickListener(taskMode:TaskMode) {
+        findNavController().navigate(R.id.newTask, bundleOf("update" to taskMode))
     }
 }
