@@ -34,6 +34,7 @@ class NewTaskFragment : Fragment() {
         getTask()
         checkTask()
     }
+
     private fun checkTask() {
         binding.btnSave.setOnClickListener {
             if (binding.etTitle.text.toString().isNotEmpty()) {
@@ -48,7 +49,7 @@ class NewTaskFragment : Fragment() {
         }
     }
 
-    private fun getTask() {
+    private fun getTask() {1133
         arguments?.let {
             val value = it.getSerializable("update")
             if (value != null) {
@@ -60,28 +61,28 @@ class NewTaskFragment : Fragment() {
     }
 
     private fun updateTask() {
-        task?.title = binding.etTitle.text.toString()
-        task?.desc = binding.etDesc.text.toString()
+        TaskMode(
+            title = binding.etTitle.text.toString(),
+            desc = binding.etDesc.text.toString()
+        )
         task?.let { App.database.TaskDao()?.update(it) }
         findNavController().navigateUp()
     }
 
     private fun insertFun() {
-        binding.btnSave.setOnClickListener {
 //            setFragmentResult(
 //                "new_task", bundleOf(
 //                    "title" to binding.etTitle.text.toString(),
 //                    "desc" to binding.etDesc.text.toString()
 //                )
 //            ) App.database.TaskDao()?.insert(
-            TaskMode(
-                title = binding.etTitle.text.toString(),
-                desc = binding.etDesc.text.toString()
-            )
-            findNavController().navigateUp()
-        }
+        TaskMode(
+            title = binding.etTitle.text.toString(),
+            desc = binding.etDesc.text.toString()
+        )
+        task?.let { App.database.TaskDao()?.insert(it) }
+        findNavController().navigateUp()
     }
-
 }
 
 //    fun initViews() {
