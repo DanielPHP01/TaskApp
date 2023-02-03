@@ -67,6 +67,8 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //check if empty ->
         initViews()
         initListeners()
     }
@@ -81,19 +83,11 @@ class HomeFragment : Fragment() {
         binding.rvHome.layoutManager = LinearLayoutManager(context)
         binding.rvHome.adapter = adapter
         setData()
-
-//        setFragmentResultListener("new_task") { key, bundle ->
-//            val title = bundle.getString("title")
-//            val desc = bundle.getString("desc")
-//            Log.e("ololo", "initViews: $title и $desc")
-//
-//            adapter.addTask(TaskMode(title, desc))
-//        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        adapter = TaskAdapter(this::onLongClickListener,this::onUpdateClickListener)
+        adapter = TaskAdapter(this::onLongClickListener, this::onUpdateClickListener)
     }
 
     private fun onLongClickListener(pos: Int) {
@@ -115,7 +109,8 @@ class HomeFragment : Fragment() {
         val listOfTask = App.database.TaskDao()?.getAllTask()
         adapter.addTasks(listOfTask as List<TaskMode>)
     }
-    private  fun onUpdateClickListener(taskMode:TaskMode) {
+
+    private fun onUpdateClickListener(taskMode: TaskMode) {
         findNavController().navigate(R.id.newTask, bundleOf("update" to taskMode))
     }
 }

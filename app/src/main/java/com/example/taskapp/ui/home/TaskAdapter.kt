@@ -57,6 +57,10 @@ class TaskAdapter(
     override fun getItemCount(): Int {
         return arrayTask.size
     }
+    fun deleteItemsAndNotifyAdapter(pos: Int) {
+        arrayTask.removeAt(pos)
+        notifyItemRemoved(pos)
+    }
 
     inner class ViewHolder(private var binding: ItemTaskBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -69,6 +73,10 @@ class TaskAdapter(
                 binding.tvTitle.setTextColor(Color.WHITE)
                 binding.tvDesc.setTextColor(Color.WHITE)
                 binding.lineRv.setBackgroundColor(Color.WHITE)
+            } else {
+                binding.tvTitle.setTextColor(Color.BLACK)
+                binding.tvDesc.setTextColor(Color.BLACK)
+                binding.lineRv.setBackgroundColor(Color.BLACK)
             }
 
             itemView.setOnLongClickListener {
