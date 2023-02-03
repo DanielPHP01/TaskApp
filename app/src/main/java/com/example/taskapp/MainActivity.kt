@@ -10,11 +10,13 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.taskapp.databinding.ActivityMainBinding
 import com.example.taskapp.utila.Preferences
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    var auth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +37,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.profileFragment
             )
         )
+
 
         if (!Preferences(applicationContext).isBoardingShowed()) {
             navController.navigate(R.id.boardFragment)
