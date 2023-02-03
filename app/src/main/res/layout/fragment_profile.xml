@@ -4,14 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E6DB00"
     tools:context=".ui.profile.ProfileFragment">
 
     <View
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:background="@color/black"
+        android:background="@drawable/back_profile_view"
         android:id="@+id/black_view"
         app:layout_constraintTop_toTopOf="parent"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:background="@drawable/back_white_view"
+        android:id="@+id/white_view"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/circle_image_view"
@@ -37,14 +44,14 @@
         android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/black_view" />
+        app:layout_constraintTop_toTopOf="@+id/white_view" />
     <EditText
-        android:id="@+id/desc_profile"
+        android:id="@+id/et_desc_profile"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_margin="40dp"
         android:background="@drawable/back_profile_name"
-        android:hint="@string/name"
+        android:hint="@string/description"
         android:paddingHorizontal="25dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
@@ -52,31 +59,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_name_profile" />
     <EditText
-        android:id="@+id/email_profile"
+        android:id="@+id/et_email_profile"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_margin="40dp"
         android:background="@drawable/back_profile_name"
-        android:hint="@string/name"
+        android:hint="@string/email"
         android:paddingHorizontal="25dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/desc_profile" />
+        app:layout_constraintTop_toBottomOf="@+id/et_desc_profile" />
+
     <EditText
-        android:id="@+id/date_profile"
+        android:id="@+id/et_date_profile"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_margin="40dp"
+        android:layout_marginTop="28dp"
         android:background="@drawable/back_profile_name"
-        android:hint="@string/name"
+        android:hint="@string/date_of_birth"
         android:paddingHorizontal="25dp"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email_profile" />
+        app:layout_constraintTop_toBottomOf="@+id/et_email_profile" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_home"
@@ -84,11 +93,10 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="-350dp"
         android:layout_marginVertical="200dp"
-        android:layout_marginTop="236dp"
-        android:contentDescription="TODO"
+        android:layout_marginStart="256dp"
+        android:layout_marginTop="220dp"
+        android:contentDescription="@string/todo"
         android:src="@drawable/ic_baseline_note_add_24"
-        app:layout_constraintStart_toEndOf="@+id/circle_image_view"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

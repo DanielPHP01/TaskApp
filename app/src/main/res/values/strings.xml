@@ -11,4 +11,7 @@
     <string name="profile">profile</string>
     <string name="name">Name</string>
     <string name="sort">Sort</string>
+    <string name="todo">TODO</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="email">Email</string>
 </resources>

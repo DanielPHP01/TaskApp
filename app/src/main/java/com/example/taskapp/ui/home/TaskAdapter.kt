@@ -48,9 +48,9 @@ class TaskAdapter(
             arrayTask[position]
         )
         if (position % 2 == 0) {
-            holder.itemView.setBackgroundResource(R.color.black)
+            holder.itemView.setBackgroundResource(R.drawable.back_profile_view)
         } else {
-            holder.itemView.setBackgroundResource(R.color.white)
+            holder.itemView.setBackgroundResource(R.drawable.back_white_view)
         }
     }
 

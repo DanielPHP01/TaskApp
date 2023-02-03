@@ -33,7 +33,7 @@ class ProfileFragment : Fragment() {
 
     ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
-        binding.circleImageView.setOnClickListener {
+        binding.fabHome.setOnClickListener {
             getContent.launch("image/*")
         }
         preferences = Preferences(requireContext())
