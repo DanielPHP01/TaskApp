@@ -10,6 +10,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.addTextChangedListener
 import com.bumptech.glide.Glide
+import com.example.taskapp.R
 import com.example.taskapp.databinding.FragmentProfileBinding
 import com.example.taskapp.utila.Preferences
 
@@ -22,7 +23,11 @@ class ProfileFragment : Fragment() {
     private val getContent: ActivityResultLauncher<String> =
         registerForActivityResult(ActivityResultContracts.GetContent()) { imageUri: Uri? ->
 
-            Glide.with(this).load(imageUri.toString()).into(binding.circleImageView)
+            //Glide.with(this).load(imageUri.toString()).into(binding.circleImageView)
+            Glide.with(this)
+                .load(imageUri.toString())
+                .placeholder(R.drawable.baseline_add_a_photo_24)
+                .into(binding.circleImageView);
             preferences.saveImage(imageUri.toString())
         }
 

@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.profileFragment
             )
         )
-
+        navController.navigate(R.id.authFragment)
 
         if (!Preferences(applicationContext).isBoardingShowed()) {
             navController.navigate(R.id.boardFragment)

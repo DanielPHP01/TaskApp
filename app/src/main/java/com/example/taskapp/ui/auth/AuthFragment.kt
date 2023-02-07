@@ -19,13 +19,12 @@ import java.util.concurrent.TimeUnit
 class AuthFragment : Fragment() {
     lateinit var binding: FragmentAuthBinding
     var auth = FirebaseAuth.getInstance()
-    var corectCoade: String? = null
+    var correctCode: String? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = FragmentAuthBinding.inflate(layoutInflater)
-        initViews()
         initListeners()
         return binding.root
 
@@ -33,66 +32,59 @@ class AuthFragment : Fragment() {
 
     private fun initListeners() {
         binding.btnSave.setOnClickListener{
-            if (binding.etPhone.text!!.isNotEmpty()) {
+            if (binding.etPhoneFrt.text!!.isNotEmpty()) {
                 sendPhone()
                 Toast.makeText(requireContext(), "отправка...", Toast.LENGTH_SHORT).show()
             } else {
-                binding.etPhone.error = "Введите номер телефона"
+                binding.etPhoneFrt.error = "Введите номер телефона"
             }
         }
         binding.btnConfirn.setOnClickListener{
             sendCode()
         }
     }
-
-    private fun sendCode() {
-        val credential =
-            PhoneAuthProvider.getCredential(
-                corectCoade.toString(), binding.etPhoneFrt.toString()
-            )
-        signInWithPhoneAuthCredential(credential)
-    }
-
-    private fun initViews() {
-
-    }
-
     private fun sendPhone() {
-        auth.setLanguageCode("ru")
+        auth.setLanguageCode("en")
         val options = PhoneAuthOptions.newBuilder(auth)
-            .setPhoneNumber(binding.etPhone.text.toString())       // Phone number to verify binding.etPhone.text.stribg
+            .setPhoneNumber(binding.etPhoneFrt.text.toString())       // Phone number to verify binding.etPhone.text.stribg
             .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
             .setActivity(requireActivity())                 // Activity (for callback binding)
             .setCallbacks(object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                 override fun onVerificationCompleted(p0: PhoneAuthCredential) {
-                     Toast.makeText(requireContext(), p0.toString(), Toast.LENGTH_SHORT).show()
+                     Toast.makeText(requireContext(), "Успешно", Toast.LENGTH_SHORT).show()
                 }
 
-                override fun onVerificationFailed(p0: FirebaseException) {
-                    Toast.makeText(requireContext(), p0.toString(), Toast.LENGTH_SHORT).show()
+                override fun onVerificationFailed(exception: FirebaseException) {
+                    Toast.makeText(requireContext(), exception.toString(), Toast.LENGTH_SHORT).show()
                 }
 
-                override fun onCodeSent(p0: String, p1: PhoneAuthProvider.ForceResendingToken) {
-                    super.onCodeSent(p0, p1)
-                    corectCoade = p0
-                    binding.etPhone.isVisible = false
+                override fun onCodeSent(vertificetionCode: String, p1: PhoneAuthProvider.ForceResendingToken) {
+                    correctCode = vertificetionCode
+                    binding.etPhoneLayoutFrt.isVisible = false
                     binding.btnSave.isVisible = false
 
-                    binding.etPhoneLayoutFrt.isVisible = true
+                    binding.etCodeLayout.isVisible = true
                     binding.btnConfirn.isVisible = true
+                    Log.e("ololo", "Correct code: $correctCode`" )
+                    super.onCodeSent(vertificetionCode, p1)
                 }
 
             })     // OnVerificationStateChangedCallbacks
             .build()
         PhoneAuthProvider.verifyPhoneNumber(options)
     }
+    private fun sendCode() {
+        val credential =
+            PhoneAuthProvider.getCredential(
+                correctCode.toString(), binding.etCode.toString()
+            )
+        signInWithPhoneAuthCredential(credential)
+    }
     private fun signInWithPhoneAuthCredential(credential: PhoneAuthCredential) {
         auth.signInWithCredential(credential)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                    findNavController().navigate(R.id.navigation_home)
-
-                    val user = task.result?.user
                 } else {
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
                         Toast.makeText(requireContext(), task.exception.toString(), Toast.LENGTH_SHORT).show()
@@ -100,7 +92,4 @@ class AuthFragment : Fragment() {
                 }
             }
     }
-
-
-
 }
