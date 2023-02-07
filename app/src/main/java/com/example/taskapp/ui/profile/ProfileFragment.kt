@@ -9,16 +9,20 @@ import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.addTextChangedListener
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.taskapp.R
 import com.example.taskapp.databinding.FragmentProfileBinding
 import com.example.taskapp.utila.Preferences
+import com.google.firebase.auth.FirebaseAuth
 
 class ProfileFragment : Fragment() {
 
     lateinit var preferences: Preferences
 
     private lateinit var binding: FragmentProfileBinding
+
+    var auth = FirebaseAuth.getInstance()
 
     private val getContent: ActivityResultLauncher<String> =
         registerForActivityResult(ActivityResultContracts.GetContent()) { imageUri: Uri? ->
@@ -44,6 +48,7 @@ class ProfileFragment : Fragment() {
         preferences = Preferences(requireContext())
         saveChanges()
         checkChanges()
+        initListeners()
         return binding.root
     }
 
@@ -60,5 +65,12 @@ class ProfileFragment : Fragment() {
             Glide.with(this).load(preferences.getImage()).into(binding.circleImageView)
         }
     }
+    private fun initListeners() {
+        binding.btnLogout.setOnClickListener {
+            auth.signOut()
+            findNavController().navigate(R.id.authFragment)
+        }
+    }
 }
+
 
