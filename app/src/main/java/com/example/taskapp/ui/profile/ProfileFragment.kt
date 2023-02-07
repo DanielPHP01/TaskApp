@@ -31,7 +31,7 @@ class ProfileFragment : Fragment() {
             Glide.with(this)
                 .load(imageUri.toString())
                 .placeholder(R.drawable.baseline_add_a_photo_24)
-                .into(binding.circleImageView);
+                .into(binding.circleImageView)
             preferences.saveImage(imageUri.toString())
         }
 
